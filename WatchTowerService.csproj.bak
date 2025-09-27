@@ -1,0 +1,57 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7A8D7C6E-6E5F-4E3F-8B6E-7F0B1F7A9B11}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>WatchTowerService</RootNamespace>
+    <AssemblyName>WatchTowerService</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+  <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+  <BaseOutputPath Condition="'$(BaseOutputPath)'==''">bin\</BaseOutputPath>
+  <OutputPath Condition="'$(OutputPath)'==''">$(BaseOutputPath)$(Platform)\$(Configuration)\</OutputPath>
+  <IntermediateOutputPath Condition="'$(IntermediateOutputPath)'==''">obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+</PropertyGroup>
+
+
+  <PropertyGroup>
+    <StartupObject>WatchTowerService.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="WatchTowerService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Services\WatchWorker.cs" />
+    <Compile Include="Services\ServiceOps.cs" />
+    <Compile Include="Models\WatchConfig.cs" />
+    <Compile Include="ProjectInstaller.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <Content Include="install-watch-tower.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="README.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

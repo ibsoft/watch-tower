@@ -1,0 +1,26 @@
+{
+  "Serilog": {
+    "MinimumLevel": "Information",
+    "WriteTo": [
+      { "Name": "Console" },
+      {
+        "Name": "File",
+        "Args": {
+          "path": "logs\\watch-tower-.log",
+          "rollingInterval": "Day",
+          "retainedFileCountLimit": 14,
+          "shared": true
+        }
+      }
+    ]
+  },
+  "WatchTower": {
+    "IntervalSeconds": 60,
+    "ServiceOpTimeoutSeconds": 30,
+    "RestartAllInGroupIfAnyDown": true,
+    "Services": [
+      { "Name": "SNMP",           "Group": "os-snmp",   "AutoRestart": true },
+      { "Name": "SNMPTrap",           "Group": "os-snmp",    "AutoRestart": false },
+    ]
+  }
+}
